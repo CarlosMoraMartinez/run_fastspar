@@ -6,6 +6,7 @@ rm -rf $OUTDIR
 python call_fastspar.py -o $OUTDIR \
     -m /home/carmoma/Documents/EarlyCause/results/descriptive1/METADATA_FILT.tsv \
     -a /home/carmoma/Documents/EarlyCause/results/descriptive1/OTUs_FILT.tsv \
+    -s Time,Group \
     --cleanup T \
     --nrand 10 \
     --iterations 5 \
