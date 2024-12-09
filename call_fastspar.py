@@ -88,7 +88,7 @@ def get_fastspar_commands(fname, outdir, fastspar_args, cleanup = True):
     cmd4 = (f"fastspar_pvalues --otu_table {fname} "
             f"--correlation {correlation} "
             f"--prefix {btcordir}/cor_{sname} "
-            f"--permutations {fastspar_args['num_permuts']} "
+            f"--permutations {fastspar_args['num_random']} "
             f"-t {fastspar_args['threads']} " 
             f"--outfile {pvalues}")
     
@@ -100,13 +100,18 @@ def get_fastspar_commands(fname, outdir, fastspar_args, cleanup = True):
     return cmdlist
 
     #
-
+def save_commands(cmdlist, outdir, name):
+    fo = open(f"{outdir}/commands_{name}.sh", 'w')
+    for cmd in cmdlist:
+        fo.write(cmd + '\n\n')
+    fo.close()
 
 
 def run_fastspar_all(fnames, outdir, fastspar_args, cleanup = True):
     for f in fnames:
         logger.log(f"Running FastSpar for file: {f}", bcolors.BOLD)
         cmds = get_fastspar_commands(f, outdir, fastspar_args, cleanup)
+        save_commands(cmds, outdir, os.path.basename(f))
         for c in cmds:
             run_command(c)
         logger.log(f"Finished FastSpar for file: {f}", bcolors.OKBLUE)
@@ -132,7 +137,6 @@ group2.add_argument('-i', '--iterations', type = int, help='Number of iterations
 group2.add_argument('-x', '--exclusion_iterations', type = int, help='Number of exclusion iterations FastSpar', default=10)
 group2.add_argument('-j', '--iterations_parallel', type = int, help='Number of iterations from bootstrapped samples', default=5)
 group2.add_argument('-n', '--nrand', type = int, help='Random samples', default=1000)
-group2.add_argument('-p', '--permutations', type = int, help='Number of permutations', default=1000)
 group2.add_argument('-e', '--exclusion_threshold', type = float, help='Correlation strength exclusion threshold.', default=0.1)
 group2.add_argument('-t', '--threads', type = int, help='Threads for FastSpar first call and fastspar_pvalues.', default=1)  
 
@@ -159,7 +163,6 @@ def main():
     fastspar_args = {}
     fastspar_args["seed"] = args.seed
     fastspar_args["num_random"] = args.nrand
-    fastspar_args["num_permuts"] = args.permutations
     fastspar_args["iterations"] = args.iterations
     fastspar_args["exclusion_iterations"] = args.exclusion_iterations
     fastspar_args["iterations_parallel"] = args.iterations_parallel
