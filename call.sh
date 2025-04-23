@@ -2,7 +2,9 @@
 
 INDIR=/media/DATOS22T/cmora/CORALS/inputdata_fastspar
 OUTDIR=FastsparFull1
-rm -rf $OUTDIR
+if [ -d "$OUTDIR" ]; then
+    rm -rf "$OUTDIR"
+fi
 
 python call_fastspar.py -o $OUTDIR \
     -m mock \
@@ -19,7 +21,9 @@ python call_fastspar.py -o $OUTDIR \
 
 
 OUTDIR=FastsparAgeGroup1
-rm -rf $OUTDIR
+if [ -d "$OUTDIR" ]; then
+    rm -rf "$OUTDIR"
+fi
 
 python call_fastspar.py -o $OUTDIR \
     -m $INDIR/remove_tanda2_metad.tsv \
