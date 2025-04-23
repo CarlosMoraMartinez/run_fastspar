@@ -10,7 +10,7 @@ python call_fastspar.py -o $OUTDIR \
     -m mock \
     -a $INDIR/remove_tanda2_otus.tsv \
     -s age_class2 \
-    --cleanup T \
+    --cleanup F \
     --nrand 1000 \
     --iterations 50 \
     --exclusion_iterations 10 \
@@ -20,20 +20,20 @@ python call_fastspar.py -o $OUTDIR \
     --threads 64
 
 
-OUTDIR=FastsparAgeGroup1
-if [ -d "$OUTDIR" ]; then
-    rm -rf "$OUTDIR"
-fi
-
-python call_fastspar.py -o $OUTDIR \
-    -m $INDIR/remove_tanda2_metad.tsv \
-    -a $INDIR/remove_tanda2_otus.tsv \
-    -s age_class2 \
-    --cleanup T \
-    --nrand 1000 \
-    --iterations 50 \
-    --exclusion_iterations 10 \
-    --exclusion_threshold 0.1 \
-    --seed 123 \
-    --iterations_parallel 5 \
-    --threads 64
+# OUTDIR=FastsparAgeGroup1
+# if [ -d "$OUTDIR" ]; then
+#     rm -rf "$OUTDIR"
+# fi
+# 
+# python call_fastspar.py -o $OUTDIR \
+#     -m $INDIR/remove_tanda2_metad.tsv \
+#     -a $INDIR/remove_tanda2_otus.tsv \
+#     -s age_class2 \
+#     --cleanup F \
+#     --nrand 1000 \
+#     --iterations 50 \
+#     --exclusion_iterations 10 \
+#     --exclusion_threshold 0.1 \
+#     --seed 123 \
+#     --iterations_parallel 5 \
+#     --threads 64
