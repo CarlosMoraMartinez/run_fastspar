@@ -151,15 +151,16 @@ def main():
     outdir: str = args.outdir
     cleanup: str = True if args.cleanup in ['T', 'True'] else False
 
-    if cleanup:
-        logger.log("WARNING: Cleaning intermediate files!", bcolors.WARNING)
-
+    logger.set_file(f"{outdir}/call_fastspar.log")
     try:
         os.mkdir(outdir)
         logger.log(f"Directory created: {outdir}", bcolors.OKBLUE)
     except:
         logger.log(f"Directory creation error: {outdir}", bcolors.FAIL)
     
+    if cleanup:
+        logger.log("WARNING: Cleaning intermediate files!", bcolors.WARNING)
+        
     fastspar_args = {}
     fastspar_args["seed"] = args.seed
     fastspar_args["num_random"] = args.nrand
