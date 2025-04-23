@@ -1,7 +1,7 @@
 #!/bin/bash
 
 INDIR=/media/DATOS22T/cmora/CORALS/inputdata_fastspar
-OUTDIR=FastsparFull2
+OUTDIR=/media/DATOS22T/cmora/CORALS/output_fastspar/FastsparFull2
 if [ -d "$OUTDIR" ]; then
     rm -rf "$OUTDIR"
 fi
@@ -20,7 +20,7 @@ python call_fastspar.py -o $OUTDIR \
     --threads 64
 
 
-OUTDIR=FastsparAgeGroup2
+OUTDIR=/media/DATOS22T/cmora/CORALS/output_fastspar/FastsparAgeGroup2
 if [ -d "$OUTDIR" ]; then
     rm -rf "$OUTDIR"
 fi
