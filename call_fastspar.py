@@ -77,7 +77,8 @@ def get_fastspar_commands(fname, outdir, fastspar_args, cleanup = True):
             f"--prefix {btdir}/{sname} "
             f"-s {fastspar_args['seed']} ")
     
-    cmd3 = ("parallel fastspar --yes --otu_table {} "
+    cmd3 = (f"parallel --tmpdir {outdir}/tmp "
+            "fastspar --yes --otu_table {} "
             f"--correlation {btcordir}"
             "/cor_{/} "
             f"--covariance {btcordir}"
@@ -157,10 +158,15 @@ def main():
         logger.log(f"Directory created: {outdir}", bcolors.OKBLUE)
     except:
         logger.log(f"Directory creation error: {outdir}", bcolors.FAIL)
+    try:
+        os.mkdir(outdir + "/tmp")
+        logger.log(f"Directory created: {outdir}/tmp", bcolors.OKBLUE)
+    except:
+        logger.log(f"Directory creation error: {outdir}/tmp", bcolors.FAIL)
     
     if cleanup:
         logger.log("WARNING: Cleaning intermediate files!", bcolors.WARNING)
-        
+
     fastspar_args = {}
     fastspar_args["seed"] = args.seed
     fastspar_args["num_random"] = args.nrand
