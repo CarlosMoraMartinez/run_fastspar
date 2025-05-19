@@ -38,18 +38,19 @@ INDIR=/media/DATOS22T/cmora/CORALS/inputdata_fastspar
 #    --iterations_parallel 10 \
 #    --threads 64
 
+INDIR=/media/DATOS/cmora/2025_alejandra_pacbio/input_fastspar
 
-for varname in Sex Category_T0 hospital educ_m_discrete af_extraesc_m_00_Cat status_c2
+for varname in Group Weight
 do
-  OUTDIR="/media/DATOS22T/cmora/CORALS/output_fastspar/Fastspar$varname"
+  OUTDIR="/media/DATOS/cmora/2025_alejandra_pacbio/output_fastspar/Fastspar$varname"
   echo "$varname: $OUTDIR"
   if [ -d "$OUTDIR" ]; then
       rm -rf "$OUTDIR"
   fi
   
   python call_fastspar.py -o $OUTDIR \
-      -m $INDIR/remove_tanda2_metad2.tsv \
-      -a $INDIR/remove_tanda2_otus.tsv \
+      -m $INDIR/metadata.tsv \
+      -a $INDIR/filt_3samples.tsv \
       -s $varname \
       --cleanup F \
       --nrand 10000 \
