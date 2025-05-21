@@ -63,13 +63,13 @@ INDIR=/media/DATOS22T/cmora/CORALS/inputdata_fastspar
 #      --threads 64
 #done
 
-INDIR=/media/DATOS/cmora/2025_alejandra_pacbio/input_fastspar2
-OUTDIR1="/media/DATOS/cmora/2025_alejandra_pacbio/output_fastspar2/SIBO"
-OUTDIR2="/media/DATOS/cmora/2025_alejandra_pacbio/output_fastspar2/Control"
+INDIR=/media/DATOS/cmora/2025_alejandra_pacbio/input_fastspar3
+OUTDIR1="/media/DATOS/cmora/2025_alejandra_pacbio/output_fastspar3/SIBO"
+OUTDIR2="/media/DATOS/cmora/2025_alejandra_pacbio/output_fastspar3/Control"
 
 python call_fastspar.py -o $OUTDIR1 \
       -m $INDIR/metadata_SIBO.tsv \
-      -a $INDIR/filt_3samples_sibo.tsv \
+      -a $INDIR/filt_3samples_sibo_species.tsv \
       --cleanup T \
       --nrand 1000 \
       --iterations 50 \
@@ -81,7 +81,7 @@ python call_fastspar.py -o $OUTDIR1 \
 
 python call_fastspar.py -o $OUTDIR2 \
       -m $INDIR/metadata_Control.tsv \
-      -a $INDIR/filt_3samples_control.tsv \
+      -a $INDIR/filt_3samples_control_species.tsv \
       --cleanup T \
       --nrand 1000 \
       --iterations 50 \
